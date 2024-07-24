@@ -5,9 +5,10 @@ export const addToCart = async (req, res) => {
   try {
     const { productId, title, qty, price, imgSrc } = req.body;
     const userId = req.user;
+
     let cart = await cartModel.findOne({ userId });
     if (!cart) {
-      cart = new cartModel({ userId, items: [] });
+      cart = new cartModel({ userId: userId._id, items: [] });
     }
     const itemIndex = cart.items.findIndex(
       (item) => item.productId.toString() === productId
@@ -30,6 +31,7 @@ export const addToCart = async (req, res) => {
 export const userCart = async (req, res) => {
   try {
     const userId = req.user;
+
     let cart = await cartModel.findOne({ userId });
     if (!cart) return res.json({ message: "Cart not found with this user id" });
     return res.json({ message: "user cart", cart });

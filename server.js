@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import userRouter from "./Routes/user.js";
 import productRouter from "./Routes/product.js";
 import cartRouter from "./Routes/cart.js";
+import addressRouter from "./Routes/address.js";
 const app = express();
 app.use(bodyParser.json());
 // mongodb connection
@@ -28,6 +29,8 @@ app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
 //   cart routes
 app.use("/api/cart", cartRouter);
+//   address routes
+app.use("/api/address", addressRouter);
 
 const port = 1000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
