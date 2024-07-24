@@ -4,7 +4,7 @@ import { cartModel } from "../Models/cartModel.js";
 export const addToCart = async (req, res) => {
   try {
     const { productId, title, qty, price, imgSrc } = req.body;
-    const userId = "669e282d13b5f191628c5938";
+    const userId = req.user;
     let cart = await cartModel.findOne({ userId });
     if (!cart) {
       cart = new cartModel({ userId, items: [] });
@@ -29,7 +29,7 @@ export const addToCart = async (req, res) => {
 // user specific cart
 export const userCart = async (req, res) => {
   try {
-    const userId = "669e311db038ed4eb28e41f6";
+    const userId = req.user;
     let cart = await cartModel.findOne({ userId });
     if (!cart) return res.json({ message: "Cart not found with this user id" });
     return res.json({ message: "user cart", cart });
@@ -41,7 +41,7 @@ export const userCart = async (req, res) => {
 // delete specific product from cart
 export const removeProduct = async (req, res) => {
   try {
-    const userId = "669e311db038ed4eb28e41f6";
+    const userId = req.user;
     const productId = req.params.productId;
     let cart = await cartModel.findOne({ userId });
     if (!cart) return res.json({ message: "Cart not found with this user id" });
@@ -61,7 +61,7 @@ export const removeProduct = async (req, res) => {
 
 export const clearCart = async (req, res) => {
   try {
-    const userId = "669e311db038ed4eb28e41f6";
+    const userId = req.user;
 
     let cart = await cartModel.findOne({ userId });
     if (!cart) {
@@ -81,7 +81,7 @@ export const clearCart = async (req, res) => {
 export const decreaseProudctQty = async (req, res) => {
   const { productId, qty } = req.body;
 
-  const userId = "669e311db038ed4eb28e41f6";
+  const userId = req.user;
 
   let cart = await cartModel.findOne({ userId });
 

@@ -1,5 +1,6 @@
 import { userModel } from "../Models/userModel.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -29,7 +30,15 @@ export const login = async (req, res) => {
     if (!validPass) {
       return res.json({ message: "Invalid credential", success: false });
     }
-    res.json({ message: "Loggedin success", userExists, success: true });
+
+    const token = jwt.sign({ userId: userExists._id }, "@$%^&^9320940349", {
+      expiresIn: "7d",
+    });
+    res.json({
+      message: "Loggedin success",
+      token: token,
+      success: true,
+    });
   } catch (err) {
     console.log(err);
     res.json({ message: err.message });
