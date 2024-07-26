@@ -54,6 +54,7 @@ export const users = async (req, res) => {
     res.json({ message: err.message });
   }
 };
+
 // get user profile
 
 export const profile = async (req, res) => {

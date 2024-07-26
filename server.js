@@ -5,6 +5,7 @@ import userRouter from "./Routes/user.js";
 import productRouter from "./Routes/product.js";
 import cartRouter from "./Routes/cart.js";
 import addressRouter from "./Routes/address.js";
+import cors from "cors";
 const app = express();
 app.use(bodyParser.json());
 // mongodb connection
@@ -19,6 +20,15 @@ mongoose
     console.log("DB not connected...");
   });
 
+// cors
+
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 //   home testing route
 
 app.get("/", (req, res) => res.json({ message: "Home" }));
