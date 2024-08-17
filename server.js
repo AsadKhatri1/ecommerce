@@ -22,7 +22,10 @@ mongoose
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow your development origin
+    origin: [
+      "http://localhost:5173",
+      "https://ecommerce-client-bay.vercel.app",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
