@@ -22,11 +22,20 @@ mongoose
 
 app.use(
   cors({
-    origin: true,
+    origin: "http://localhost:5173", // Allow your development origin
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
+// app.use(
+//   cors({
+//     origin: true,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
+
 // Define allowed origins
 // const allowedOrigins = [
 //   "http://localhost:5173",
